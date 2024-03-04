@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * @deprecated use Laravel's built-in encrypted casting instead, this class will be removed in a future version
+ * @see ../MIGRATING.md for a step-by-step guide on how to migrate
+ */
 class EncryptedModel extends Model
 {
     /**
@@ -26,6 +30,22 @@ class EncryptedModel extends Model
     public function setRawAttributes(array $attributes, $sync = false)
     {
         return parent::setRawAttributes($this->decryptAttributes($attributes), $sync);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function originalIsEquivalent($key)
+    {
+        if (static::$encrypter instanceof ModelEncrypter && $this->isEncryptedCastable($key)) {
+            return false;
+        }
+
+        return parent::originalIsEquivalent($key);
     }
 
     /**

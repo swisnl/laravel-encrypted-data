@@ -15,8 +15,8 @@ This package contains several Laravel utilities to work with encrypted data.
 
 Via Composer
 
-``` bash
-$ composer require swisnl/laravel-encrypted-data
+```bash
+composer require swisnl/laravel-encrypted-data
 ```
 
 N.B. Using Laravel 6-8? Please use version [1.x](https://github.com/swisnl/laravel-encrypted-data/tree/1.x) of this package.
@@ -33,7 +33,7 @@ N.B. Using Laravel 6-8? Please use version [1.x](https://github.com/swisnl/larav
 
 Extend `\Swis\Laravel\Encrypted\EncryptedModel` in your model and define the encrypted fields. Make sure your database columns are long enough, so your data isn't truncated!
 
-``` php
+```php
 protected $encrypted = [
     'secret',
 ];
@@ -45,7 +45,7 @@ You can now simply use the model properties as usual and everything will be encr
 
 Configure the storage driver in `config/filesystems.php`.
 
-``` php
+```php
 'disks' => [
     'local' => [
         'driver' => 'local-encrypted',
@@ -78,8 +78,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
-$ composer test
+```bash
+composer test
 ```
 
 ## Contributing
