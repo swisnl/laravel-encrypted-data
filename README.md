@@ -15,8 +15,8 @@ This package contains several Laravel utilities to work with encrypted data.
 
 Via Composer
 
-``` bash
-$ composer require swisnl/laravel-encrypted-data
+```bash
+composer require swisnl/laravel-encrypted-data
 ```
 
 ## Usage
@@ -26,12 +26,12 @@ $ composer require swisnl/laravel-encrypted-data
 > [!WARNING]
 > Laravel supports [encrypted casts](https://laravel.com/docs/10.x/eloquent-mutators#encrypted-casting) since version 8.12, so new projects should use that instead of the models provided by this package.
 >
-> We aim to provide a migration path to encrypted casts. See issue [#1](https://github.com/swisnl/laravel-encrypted-data/issues/1) for more information.
+> Please see [MIGRATING](MIGRATING.md) for a step-by-step guide on how to migrate.
 >
 
 Extend `\Swis\Laravel\Encrypted\EncryptedModel` in your model and define the encrypted fields. Make sure your database columns are long enough, so your data isn't truncated!
 
-``` php
+```php
 protected $encrypted = [
     'secret',
 ];
@@ -43,7 +43,7 @@ You can now simply use the model properties as usual and everything will be encr
 
 Configure the storage driver in `config/filesystems.php`.
 
-``` php
+```php
 'disks' => [
     'local' => [
         'driver' => 'local-encrypted',
@@ -76,8 +76,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
-$ composer test
+```bash
+composer test
 ```
 
 ## Contributing
