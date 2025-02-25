@@ -19,8 +19,6 @@ Via Composer
 $ composer require swisnl/laravel-encrypted-data
 ```
 
-N.B. Using Laravel 6-8? Please use version [1.x](https://github.com/swisnl/laravel-encrypted-data/tree/1.x) of this package.
-
 ## Usage
 
 ### Models
