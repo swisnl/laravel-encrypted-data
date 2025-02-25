@@ -3,14 +3,13 @@
 namespace Swis\Laravel\Encrypted\Tests;
 
 use Illuminate\Database\Connection;
+use PHPUnit\Framework\Attributes\Test;
 use Swis\Laravel\Encrypted\EncryptedModel;
 use Swis\Laravel\Encrypted\Tests\_mocks\Builder;
 
 class EncryptedModelTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function itDecryptsRawAttributes(): void
     {
         // arrange
@@ -25,9 +24,7 @@ class EncryptedModelTest extends TestCase
         $this->assertEquals($value, $model->getAttribute('secret'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function itDoesNotDecryptRawAttributesThatAreNotConfiguredAsSuch(): void
     {
         // arrange
@@ -41,9 +38,7 @@ class EncryptedModelTest extends TestCase
         $this->assertEquals($value, $model->getAttribute('not_secret'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function itDoesNotDecryptRawAttributesThatAreNull(): void
     {
         // arrange
@@ -56,9 +51,7 @@ class EncryptedModelTest extends TestCase
         $this->assertNull($model->getAttribute('secret'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function itDoesNotDecryptRawAttributesThatAreNotEncrypted(): void
     {
         // arrange
@@ -72,9 +65,7 @@ class EncryptedModelTest extends TestCase
         $this->assertEquals($value, $model->getAttribute('secret'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function itEncryptsDataOnInsert(): void
     {
         // arrange
@@ -102,9 +93,7 @@ class EncryptedModelTest extends TestCase
         // expectations
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function itEncryptsDataOnUpdate(): void
     {
         // arrange
