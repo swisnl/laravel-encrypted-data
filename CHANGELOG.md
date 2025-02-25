@@ -8,6 +8,17 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing.
 
+## [2.3.0] - 2025-02-25
+
+### Added
+
+- Added support for Laravel 12.
+
+### Changed
+
+- Bumped minimum Laravel version to 10.
+- Bumped minimum PHP version to 8.1.
+
 ## [2.2.0] - 2024-10-24
 
 ### Added
