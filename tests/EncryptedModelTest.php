@@ -2,8 +2,9 @@
 
 namespace Swis\Laravel\Encrypted\Tests;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Connection;
 use Swis\Laravel\Encrypted\EncryptedModel;
+use Swis\Laravel\Encrypted\Tests\_mocks\Builder;
 
 class EncryptedModelTest extends TestCase
 {
@@ -79,11 +80,15 @@ class EncryptedModelTest extends TestCase
         // arrange
         $attributes = ['secret' => 'secret'];
 
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\Illuminate\Database\Connection $connection */
+        $connection = $this->createMock(Connection::class);
+        $connection->method('getName')
+            ->willReturn('foo');
+
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Illuminate\Database\Eloquent\Builder $query */
-        $query = $this->getMockBuilder(Builder::class)
-            ->disableOriginalConstructor()
-            ->addMethods(['getConnection', 'insertGetId'])
-            ->getMock();
+        $query = $this->createMock(Builder::class);
+        $query->method('getConnection')
+            ->willReturn($connection);
         $query->expects($this->once())
             ->method('insertGetId')
             ->with($this->logicalNot($this->equalTo($attributes)), 'id')
@@ -106,10 +111,7 @@ class EncryptedModelTest extends TestCase
         $attributes = ['secret' => 'secret'];
 
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Illuminate\Database\Eloquent\Builder $query */
-        $query = $this->getMockBuilder(Builder::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['where', 'update'])
-            ->getMock();
+        $query = $this->createMock(Builder::class);
         $query->method('where')
             ->willReturnSelf();
         $query->expects($this->once())
