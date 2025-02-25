@@ -5,7 +5,7 @@ namespace Swis\Laravel\Encrypted\Tests;
 use Illuminate\Support\Facades\Storage;
 use PHPUnit\Framework\Attributes\Test;
 
-class FilesystemTest extends TestCase
+final class FilesystemTest extends TestCase
 {
     #[Test]
     public function itRegistersTheFilesystemDriver(): void

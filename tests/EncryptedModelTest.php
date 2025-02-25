@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use Swis\Laravel\Encrypted\EncryptedModel;
 use Swis\Laravel\Encrypted\Tests\_mocks\Builder;
 
-class EncryptedModelTest extends TestCase
+final class EncryptedModelTest extends TestCase
 {
     #[Test]
     public function itDecryptsRawAttributes(): void
