@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Swis\Laravel\Encrypted\Commands;
 
 use Illuminate\Console\Command;
