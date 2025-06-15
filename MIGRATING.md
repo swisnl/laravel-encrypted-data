@@ -3,8 +3,6 @@
 ## To Laravel Encrypted Casting
 The main difference between this package and [Laravel Encrypted Casting](https://laravel.com/docs/eloquent-mutators#encrypted-casting) is that this package serializes the data before encrypting it, while Laravel Encrypted Casting encrypts the data directly. This means that the data is not compatible between the two packages. In order to migrate from this package to Laravel Encrypted Casting, you will need to decrypt the data and then re-encrypt it using Laravel Encrypted Casting. Here is a step-by-step guide on how to do this:
 
-[//]: # (TODO: What to do when you need encrypted serialized data?)
-
 1. Make sure you're running on Laravel 11 or higher.
 2. Remove the `Swis\Laravel\Encrypted\EncryptedModel` from your models and replace it with `Illuminate\Database\Eloquent\Model`:
 ```diff
@@ -23,17 +21,20 @@ The main difference between this package and [Laravel Encrypted Casting](https:/
 +     'secret' => 'encrypted',
 + ];
 ```
-4. If you're using encrypted date(time)s, use the custom casts provided by this package:
+4. If you're using encrypted booleans or date(time)s, use the custom casts provided by this package:
 ```diff
 - protected $encrypted = [
--     'secret',
+-     'secret_boolean',
+-     'secret_datetime',
 - ];
 -
 - protected $casts = [
--     'secret' => 'datetime',
+-     'secret_boolean' => 'bool',
+-     'secret_datetime' => 'datetime',
 - ];
 + protected $casts = [
-+     'secret' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime::class,
++     'secret_boolean' => \Swis\Laravel\Encrypted\Casts\AsEncryptedBoolean::class,
++     'secret_datetime' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime::class,
 + ];
 ```
 5. Set up our custom model encrypter in your `AppServiceProvider`:
