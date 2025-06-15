@@ -29,6 +29,14 @@ composer require swisnl/laravel-encrypted-data
 
 You can use the Eloquent casts provided by this package and everything will be encrypted/decrypted under the hood!
 
+#### Boolean
+
+```php
+protected $casts = [
+    'boolean' => \Swis\Laravel\Encrypted\Casts\AsEncryptedBoolean::class,
+];
+```
+
 #### Datetime
 
 ```php
