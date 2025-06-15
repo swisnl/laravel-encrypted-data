@@ -6,6 +6,7 @@ namespace Swis\Laravel\Encrypted\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 
@@ -18,10 +19,7 @@ class AsEncryptedBoolean implements Castable
      */
     public static function castUsing(array $arguments): CastsAttributes
     {
-        /*
-         * @todo Implement \Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes when Laravel <12 support is dropped.
-         */
-        return new class implements CastsAttributes {
+        return new class implements CastsAttributes, ComparesCastableAttributes {
             /**
              * @param string|null          $value
              * @param array<string, mixed> $attributes
