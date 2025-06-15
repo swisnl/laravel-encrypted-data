@@ -3,7 +3,7 @@
 ## To Laravel Encrypted Casting
 The main difference between this package and [Laravel Encrypted Casting](https://laravel.com/docs/eloquent-mutators#encrypted-casting) is that this package serializes the data before encrypting it, while Laravel Encrypted Casting encrypts the data directly. This means that the data is not compatible between the two packages. In order to migrate from this package to Laravel Encrypted Casting, you will need to decrypt the data and then re-encrypt it using Laravel Encrypted Casting. Here is a step-by-step guide on how to do this:
 
-1. Make sure you're running on Laravel 11 or higher.
+1. Make sure you're running on Laravel 12.20 or higher.
 2. Remove the `Swis\Laravel\Encrypted\EncryptedModel` from your models and replace it with `Illuminate\Database\Eloquent\Model`:
 ```diff
 - use Swis\Laravel\Encrypted\EncryptedModel
