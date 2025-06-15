@@ -3,7 +3,6 @@
 namespace Swis\Laravel\Encrypted\Tests;
 
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
-use Illuminate\Foundation\Application;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Swis\Laravel\Encrypted\ModelEncrypter;
@@ -92,10 +91,6 @@ class ModelEncrypterTest extends TestCase
 
     public function testGetPreviousKeysMergesWithDummy(): void
     {
-        if (version_compare(Application::VERSION, '11.0.0', '<')) {
-            $this->markTestSkipped('The test requires Laravel 11 or higher to run.');
-        }
-
         $this->mockEncrypter->expects($this->once())
             ->method('getPreviousKeys')
             ->willReturn(['prev1', 'prev2']);
@@ -110,10 +105,6 @@ class ModelEncrypterTest extends TestCase
 
     public function testGetAllKeysMergesCurrentAndPrevious(): void
     {
-        if (version_compare(Application::VERSION, '11.0.0', '<')) {
-            $this->markTestSkipped('The test requires Laravel 11 or higher to run.');
-        }
-
         $this->mockEncrypter->expects($this->once())
             ->method('getKey')
             ->willReturn('key123');
