@@ -6,6 +6,7 @@ namespace Swis\Laravel\Encrypted\Casts;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes;
 use Illuminate\Contracts\Database\Eloquent\SerializesCastableAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -16,10 +17,8 @@ use Illuminate\Support\Facades\Date;
  * @internal
  *
  * @implements \Illuminate\Contracts\Database\Eloquent\CastsAttributes<\Illuminate\Support\Carbon|\Carbon\CarbonImmutable, string|\Illuminate\Support\Carbon|\Carbon\CarbonImmutable>
- *
- * @todo Implement \Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes when Laravel <12 support is dropped.
  */
-class EncryptedDateTime implements CastsAttributes, SerializesCastableAttributes
+class EncryptedDateTime implements CastsAttributes, SerializesCastableAttributes, ComparesCastableAttributes
 {
     /**
      * @param array<int, string>                                                        $arguments
