@@ -1,12 +1,12 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Swis\Laravel\Encrypted\Casts\AsEncryptedBoolean;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
 class AsEncryptedBooleanTest extends TestCase
 {

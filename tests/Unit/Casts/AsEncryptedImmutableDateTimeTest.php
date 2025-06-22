@@ -1,15 +1,15 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Casts\AsEncryptedImmutableDateTime;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
-class AsEncryptedDateTimeTest extends TestCase
+class AsEncryptedImmutableDateTimeTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -20,7 +20,7 @@ class AsEncryptedDateTimeTest extends TestCase
     #[Test]
     public function getReturnsNullForNull(): void
     {
-        $cast = AsEncryptedDateTime::castUsing([]);
+        $cast = AsEncryptedImmutableDateTime::castUsing([]);
         $model = new Model();
 
         $result = $cast->get($model, 'datetime', null, []);
@@ -29,21 +29,21 @@ class AsEncryptedDateTimeTest extends TestCase
     }
 
     #[Test]
-    public function getReturnsCarbonInstance(): void
+    public function getReturnsCarbonImmutableInstance(): void
     {
-        $cast = AsEncryptedDateTime::castUsing([]);
+        $cast = AsEncryptedImmutableDateTime::castUsing([]);
         $model = new Model();
         $date = '2024-07-02 15:30:45';
 
         $result = $cast->get($model, 'datetime', $date, []);
 
-        $this->assertInstanceOf(Carbon::class, $result);
+        $this->assertInstanceOf(CarbonImmutable::class, $result);
         $this->assertEquals('2024-07-02 15:30:45', $result->toDateTimeString());
     }
 
     #[Test]
     public function formatReturnsExpectedString(): void
     {
-        $this->assertEquals(AsEncryptedDateTime::class.':Y-m-d H:i:s', AsEncryptedDateTime::format('Y-m-d H:i:s'));
+        $this->assertEquals(AsEncryptedImmutableDateTime::class.':Y-m-d H:i:s', AsEncryptedImmutableDateTime::format('Y-m-d H:i:s'));
     }
 }

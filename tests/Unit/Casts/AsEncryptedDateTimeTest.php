@@ -1,15 +1,15 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
-use Carbon\CarbonImmutable;
+use Illuminate\Support\Carbon;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Swis\Laravel\Encrypted\Casts\AsEncryptedImmutableDateTime;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
-class AsEncryptedImmutableDateTimeTest extends TestCase
+class AsEncryptedDateTimeTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -20,7 +20,7 @@ class AsEncryptedImmutableDateTimeTest extends TestCase
     #[Test]
     public function getReturnsNullForNull(): void
     {
-        $cast = AsEncryptedImmutableDateTime::castUsing([]);
+        $cast = AsEncryptedDateTime::castUsing([]);
         $model = new Model();
 
         $result = $cast->get($model, 'datetime', null, []);
@@ -29,21 +29,21 @@ class AsEncryptedImmutableDateTimeTest extends TestCase
     }
 
     #[Test]
-    public function getReturnsCarbonImmutableInstance(): void
+    public function getReturnsCarbonInstance(): void
     {
-        $cast = AsEncryptedImmutableDateTime::castUsing([]);
+        $cast = AsEncryptedDateTime::castUsing([]);
         $model = new Model();
         $date = '2024-07-02 15:30:45';
 
         $result = $cast->get($model, 'datetime', $date, []);
 
-        $this->assertInstanceOf(CarbonImmutable::class, $result);
+        $this->assertInstanceOf(Carbon::class, $result);
         $this->assertEquals('2024-07-02 15:30:45', $result->toDateTimeString());
     }
 
     #[Test]
     public function formatReturnsExpectedString(): void
     {
-        $this->assertEquals(AsEncryptedImmutableDateTime::class.':Y-m-d H:i:s', AsEncryptedImmutableDateTime::format('Y-m-d H:i:s'));
+        $this->assertEquals(AsEncryptedDateTime::class.':Y-m-d H:i:s', AsEncryptedDateTime::format('Y-m-d H:i:s'));
     }
 }

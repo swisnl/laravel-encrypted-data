@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Carbon;
@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Date;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Swis\Laravel\Encrypted\Casts\EncryptedDateTime;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
 class EncryptedDateTimeTest extends TestCase
 {

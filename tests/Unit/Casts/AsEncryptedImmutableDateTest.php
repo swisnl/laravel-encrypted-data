@@ -1,15 +1,15 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Swis\Laravel\Encrypted\Casts\AsEncryptedDate;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Casts\AsEncryptedImmutableDate;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
-class AsEncryptedDateTest extends TestCase
+class AsEncryptedImmutableDateTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -20,7 +20,7 @@ class AsEncryptedDateTest extends TestCase
     #[Test]
     public function getReturnsNullForNull(): void
     {
-        $cast = AsEncryptedDate::castUsing([]);
+        $cast = AsEncryptedImmutableDate::castUsing([]);
         $model = new Model();
 
         $result = $cast->get($model, 'date', null, []);
@@ -29,21 +29,21 @@ class AsEncryptedDateTest extends TestCase
     }
 
     #[Test]
-    public function getAppliesStartOfDayClosure(): void
+    public function getAppliesStartOfDayAndImmutable(): void
     {
-        $cast = AsEncryptedDate::castUsing([]);
+        $cast = AsEncryptedImmutableDate::castUsing([]);
         $model = new Model();
         $date = '2024-07-02 15:30:45';
 
         $result = $cast->get($model, 'date', $date, []);
 
-        $this->assertInstanceOf(Carbon::class, $result);
+        $this->assertInstanceOf(CarbonImmutable::class, $result);
         $this->assertEquals('2024-07-02 00:00:00', $result->toDateTimeString());
     }
 
     #[Test]
     public function formatReturnsExpectedString(): void
     {
-        $this->assertEquals(AsEncryptedDate::class.':Y-m-d', AsEncryptedDate::format('Y-m-d'));
+        $this->assertEquals(AsEncryptedImmutableDate::class.':Y-m-d', AsEncryptedImmutableDate::format('Y-m-d'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests;
+namespace Swis\Laravel\Encrypted\Tests\Unit;
 
 use Illuminate\Contracts\Encryption\Encrypter as EncrypterContract;
 use PHPUnit\Framework\Attributes\Test;
