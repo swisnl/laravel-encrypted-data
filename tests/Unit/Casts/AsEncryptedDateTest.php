@@ -1,12 +1,12 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\Casts;
+namespace Swis\Laravel\Encrypted\Tests\Unit\Casts;
 
 use Illuminate\Support\Carbon;
 use PHPUnit\Framework\TestCase;
 use Swis\Laravel\Encrypted\Casts\AsEncryptedDate;
-use Swis\Laravel\Encrypted\Tests\_mocks\DummyEncrypter;
-use Swis\Laravel\Encrypted\Tests\_mocks\Model;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\DummyEncrypter;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Model;
 
 class AsEncryptedDateTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests\_mocks;
+namespace Swis\Laravel\Encrypted\Tests\Unit\_mocks;
 
 class DummyEncrypter
 {

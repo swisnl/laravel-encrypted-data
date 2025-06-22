@@ -1,11 +1,12 @@
 <?php
 
-namespace Swis\Laravel\Encrypted\Tests;
+namespace Swis\Laravel\Encrypted\Tests\Unit;
 
 use Illuminate\Database\Connection;
 use PHPUnit\Framework\Attributes\Test;
 use Swis\Laravel\Encrypted\EncryptedModel;
-use Swis\Laravel\Encrypted\Tests\_mocks\Builder;
+use Swis\Laravel\Encrypted\Tests\TestCase;
+use Swis\Laravel\Encrypted\Tests\Unit\_mocks\Builder;
 
 final class EncryptedModelTest extends TestCase
 {
