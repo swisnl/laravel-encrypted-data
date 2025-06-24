@@ -1,0 +1,20 @@
+laravel: './workbench'
+
+migrations:
+  - workbench/database/migrations
+
+workbench:
+  start: '/'
+  install: true
+  health: false
+  discovers:
+    web: false
+    api: false
+    commands: fa;se
+    components: false
+    factories: false
+    views: false
+  build:
+    - create-sqlite-db
+    - db-wipe
+    - migrate-fresh

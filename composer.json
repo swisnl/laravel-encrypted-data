@@ -36,13 +36,21 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Swis\\Laravel\\Encrypted\\Tests\\": "tests"
+            "Swis\\Laravel\\Encrypted\\Tests\\": "tests",
+            "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "test": "phpunit",
         "check-style": "php-cs-fixer fix --dry-run -v",
-        "fix-style": "php-cs-fixer fix"
+        "fix-style": "php-cs-fixer fix",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi"
     },
     "extra": {
         "branch-alias": {
