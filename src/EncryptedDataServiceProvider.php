@@ -12,6 +12,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use League\Flysystem\Visibility;
 use Swis\Flysystem\Encrypted\EncryptedFilesystemAdapter;
+use Swis\Laravel\Encrypted\Commands\ReEncryptModels;
 
 class EncryptedDataServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,12 @@ class EncryptedDataServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->setupStorageDriver();
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ReEncryptModels::class,
+            ]);
+        }
     }
 
     protected function setupStorageDriver(): void

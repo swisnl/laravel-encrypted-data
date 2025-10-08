@@ -15,35 +15,45 @@ This package contains several Laravel utilities to work with encrypted data.
 
 Via Composer
 
-``` bash
-$ composer require swisnl/laravel-encrypted-data
+```bash
+composer require swisnl/laravel-encrypted-data
 ```
 
 ## Usage
 
-### Models
+### Eloquent casts
 
 > [!WARNING]
-> Laravel supports [encrypted casts](https://laravel.com/docs/10.x/eloquent-mutators#encrypted-casting) since version 8.12, so new projects should use that instead of the models provided by this package.
->
-> We aim to provide a migration path to encrypted casts. See issue [#1](https://github.com/swisnl/laravel-encrypted-data/issues/1) for more information.
+> Older versions of this package needed a custom model class to encrypt data. This is now replaced with custom casts. Please see [MIGRATING](MIGRATING.md) for a step-by-step guide on how to migrate.
 >
 
-Extend `\Swis\Laravel\Encrypted\EncryptedModel` in your model and define the encrypted fields. Make sure your database columns are long enough, so your data isn't truncated!
+You can use the Eloquent casts provided by this package and everything will be encrypted/decrypted under the hood!
 
-``` php
-protected $encrypted = [
-    'secret',
+#### Boolean
+
+```php
+protected $casts = [
+    'boolean' => \Swis\Laravel\Encrypted\Casts\AsEncryptedBoolean::class,
 ];
 ```
 
-You can now simply use the model properties as usual and everything will be encrypted/decrypted under the hood!
+#### Datetime
+
+```php
+protected $casts = [
+    'date' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDate::class,
+    'datetime' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime::class,
+    'immutable_date' => \Swis\Laravel\Encrypted\Casts\AsEncryptedImmutableDate::class,
+    'immutable_datetime' => \Swis\Laravel\Encrypted\Casts\AsEncryptedImmutableDateTime::class,
+    'date_with_custom_format' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDate::format('Y-m-d'),
+];
+```
 
 ### Filesystem
 
 Configure the storage driver in `config/filesystems.php`.
 
-``` php
+```php
 'disks' => [
     'local' => [
         'driver' => 'local-encrypted',
@@ -60,10 +70,9 @@ Due to the encryption, some issues/limitations apply:
 
 1. Encrypted data is — depending on what you encrypt — roughly 30-40% bigger.
 
-### Models
+### Casts
 
-1. You can't query or order columns that are encrypted in your SQL-statements, but you can query or sort the results using collection methods;
-2. All data is being serialized before it is encrypted — and unserialized after it is decrypted — so everything is stored exactly as how Laravel would insert it into the database. You can use [Eloquent Mutators](https://laravel.com/docs/9.x/eloquent-mutators) as you normally would.
+1. You can't query or order columns that are encrypted in your SQL-statements, but you can query or sort the results using collection methods.
 
 ### Filesystem
 
@@ -76,8 +85,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
-$ composer test
+```bash
+composer test
 ```
 
 ## Contributing
