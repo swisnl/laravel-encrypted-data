@@ -13,7 +13,7 @@ use Workbench\App\Models\SomeClass;
 use Workbench\App\OtherSecretModels\BarModel;
 use Workbench\App\OtherSecretModels\FooModel;
 
-class ReEncryptModelsTest extends TestCase
+final class ReEncryptModelsTest extends TestCase
 {
     use WithWorkbench;
     use RefreshDatabase;

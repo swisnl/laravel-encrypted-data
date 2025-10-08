@@ -9,7 +9,7 @@ use Swis\Laravel\Encrypted\ModelEncrypter;
 use Swis\Laravel\Encrypted\Tests\TestCase;
 use Workbench\App\Models\SecretModel;
 
-class MigrationTest extends TestCase
+final class MigrationTest extends TestCase
 {
     use WithWorkbench;
     use RefreshDatabase;
