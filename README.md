@@ -82,7 +82,7 @@ php artisan encrypted-data:re-encrypt:models
 Options:
 * `--model=`: Specify one or more model class names to re-encrypt. Auto-detects models if not provided.
 * `--except=`: Exclude one or more model class names from re-encryption.
-* `--path=`: Absolute path(s) to directories where models are located. Falls back to Models directory if not provided.
+* `--path=`: Path(s) to directories where models are located. Falls back to Models directory if not provided.
 * `--casts=`: Regex to match casts that should be re-encrypted.
 * `--chunk=`: Number of models to process per chunk.
 * `--quietly`: Re-encrypt models without raising events.
