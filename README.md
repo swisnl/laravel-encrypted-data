@@ -64,6 +64,46 @@ Configure the storage driver in `config/filesystems.php`.
 
 You can now simply use the storage methods as usual and everything will be encrypted/decrypted under the hood!
 
+### Commands
+
+This package provides Artisan commands to help you re-encrypt your data after [rotating your encryption key](https://laravel.com/docs/12.x/encryption#gracefully-rotating-encryption-keys). You want to run these commands because Laravel only re-encrypts data when a value actually changes. This means that after rotating your encryption key, all existing data remains encrypted with the old key until it is updated. If your previous key is ever compromised, or you want to ensure all data uses the new key, you need to re-encrypt everything. These commands automate that process, making sure all your data is protected with the latest encryption key.
+
+> [!IMPORTANT]
+> Before running these commands, ensure you have rotated your encryption key and have set the `APP_PREVIOUS_KEYS` environment variable with your previous encryption key(s).
+
+#### Re-encrypt models
+
+Re-encrypts all model attributes that use encrypted casts.
+
+```bash
+php artisan encrypted-data:re-encrypt:models
+```
+
+Options:
+* `--model=`: Specify one or more model class names to re-encrypt. Auto-detects models if not provided.
+* `--except=`: Exclude one or more model class names from re-encryption.
+* `--path=`: Absolute path(s) to directories where models are located. Falls back to Models directory if not provided.
+* `--casts=`: Regex to match casts that should be re-encrypted.
+* `--chunk=`: Number of models to process per chunk.
+* `--quietly`: Re-encrypt models without raising events.
+* `--no-touch`: Do not update timestamps when saving.
+* `--with-trashed`: Include soft-deleted models.
+* `--force`: Run without confirmation.
+
+#### Re-encrypt files
+
+Re-encrypts all files on encrypted disks.
+
+```bash
+php artisan encrypted-data:re-encrypt:files
+```
+
+Options:
+* `--disk=`: Specify one or more disks to re-encrypt. Auto-detects disks if not provided.
+* `--dir=`: Directories (within the disk) to scan for files. Defaults to root if not provided.
+* `--except=`: Files or directories (within the disk) to exclude.
+* `--force`: Run without confirmation.
+
 ## Known issues/limitations
 
 Due to the encryption, some issues/limitations apply:
