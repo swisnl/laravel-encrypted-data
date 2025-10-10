@@ -12,6 +12,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use League\Flysystem\Visibility;
 use Swis\Flysystem\Encrypted\EncryptedFilesystemAdapter;
+use Swis\Laravel\Encrypted\Commands\ReEncryptFiles;
 use Swis\Laravel\Encrypted\Commands\ReEncryptModels;
 
 class EncryptedDataServiceProvider extends ServiceProvider
@@ -32,6 +33,7 @@ class EncryptedDataServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
+                ReEncryptFiles::class,
                 ReEncryptModels::class,
             ]);
         }
