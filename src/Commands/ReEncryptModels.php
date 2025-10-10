@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -69,20 +70,28 @@ class ReEncryptModels extends Command
                 })
                 ->eachById(
                     function (Model $model) {
+                        $this->line($model->getKey(), verbosity: OutputInterface::VERBOSITY_VERBOSE);
+
                         if ($this->option('no-touch')) {
                             $model->timestamps = false;
                         }
 
                         // Set each encrypted attribute to trigger re-encryption
-                        collect($model->getCasts())
+                        $attributes = collect($model->getCasts())
                             ->filter(fn (string $cast): bool => (bool) preg_match($this->option('casts'), $cast))
                             ->keys()
                             ->each(fn ($key) => $model->setAttribute($key, $model->getAttribute($key)));
 
                         if ($this->option('quietly')) {
-                            $model->saveQuietly();
+                            $saved = $model->saveQuietly();
                         } else {
-                            $model->save();
+                            $saved = $model->save();
+                        }
+
+                        if ($saved) {
+                            $this->line('Updated:'.PHP_EOL.$attributes->map(fn (string $key): string => ' - '.$key)->join(PHP_EOL), verbosity: OutputInterface::VERBOSITY_VERY_VERBOSE);
+                        } else {
+                            $this->warn('No changes', verbosity: OutputInterface::VERBOSITY_VERBOSE);
                         }
                     },
                     $this->option('chunk')

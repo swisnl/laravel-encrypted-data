@@ -90,8 +90,30 @@ final class ReEncryptModelsTest extends TestCase
     #[DefineEnvironment('hasPreviousKeys')]
     public function outputsStatus(): void
     {
+        /** @var \Workbench\App\Models\SecretModel $model */
+        $model = SecretModel::create([
+            'encrypted_string' => 'foo',
+        ]);
+
         $this->artisan('encrypted-data:re-encrypt:models', ['--force' => true])
             ->expectsOutput('Re-encrypting '.SecretModel::class.'...')
+            ->doesntExpectOutput($model->getKey())
+            ->expectsOutput('Re-encrypting done!')
+            ->assertExitCode(0);
+    }
+
+    #[Test]
+    #[DefineEnvironment('hasPreviousKeys')]
+    public function outputsModelIdsInVerboseMode(): void
+    {
+        /** @var \Workbench\App\Models\SecretModel $model */
+        $model = SecretModel::create([
+            'encrypted_string' => 'foo',
+        ]);
+
+        $this->artisan('encrypted-data:re-encrypt:models', ['--force' => true, '-v' => true])
+            ->expectsOutput('Re-encrypting '.SecretModel::class.'...')
+            ->expectsOutput($model->getKey())
             ->expectsOutput('Re-encrypting done!')
             ->assertExitCode(0);
     }
