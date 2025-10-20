@@ -89,6 +89,7 @@ Options:
 * `--no-touch`: Do not update timestamps when saving.
 * `--with-trashed`: Include soft-deleted models.
 * `--force`: Run without confirmation.
+* `--verbose`: Be more verbose about what the command is doing.
 
 #### Re-encrypt files
 
@@ -103,6 +104,7 @@ Options:
 * `--dir=`: Directories (within the disk) to scan for files. Defaults to root if not provided.
 * `--except=`: Files or directories (within the disk) to exclude.
 * `--force`: Run without confirmation.
+* `--verbose`: Be more verbose about what the command is doing.
 
 ## Known issues/limitations
 
