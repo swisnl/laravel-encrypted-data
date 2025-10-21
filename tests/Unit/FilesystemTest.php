@@ -12,7 +12,7 @@ final class FilesystemTest extends TestCase
     protected function usesEncryptedDisk($app): void
     {
         $app['config']->set('filesystems.default', 'local');
-        $app['config']->set('filesystems.disks.local', ['driver' => 'local-encrypted', 'root' => dirname(__DIR__).'/_files/']);
+        $app['config']->set('filesystems.disks.local', ['driver' => 'encrypted', 'disk' => ['driver' => 'local', 'root' => dirname(__DIR__).'/_files/']]);
     }
 
     #[Test]

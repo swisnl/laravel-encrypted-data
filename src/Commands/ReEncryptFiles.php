@@ -7,7 +7,7 @@ namespace Swis\Laravel\Encrypted\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use Swis\Flysystem\Encrypted\EncryptedFilesystemAdapter;
+use Swis\Laravel\Encrypted\EncryptedFilesystemAdapter;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ReEncryptFiles extends Command
@@ -75,6 +75,7 @@ class ReEncryptFiles extends Command
             $directories->push('');
         }
 
+        /** @var \Swis\Laravel\Encrypted\EncryptedFilesystemAdapter $filesystem */
         $filesystem = Storage::disk($disk);
 
         return $directories
@@ -93,7 +94,7 @@ class ReEncryptFiles extends Command
             ->unique()
             ->each(function (string $file) use ($filesystem) {
                 $this->line($file, verbosity: OutputInterface::VERBOSITY_VERBOSE);
-                $filesystem->put($file, $filesystem->get($file));
+                $filesystem->reEncrypt($file);
             });
     }
 
@@ -133,6 +134,6 @@ class ReEncryptFiles extends Command
      */
     protected function diskCanBeReEncrypted(string $disk): bool
     {
-        return rescue(static fn (): bool => Storage::disk($disk)->getAdapter() instanceof EncryptedFilesystemAdapter, false, false);
+        return rescue(static fn (): bool => Storage::disk($disk) instanceof EncryptedFilesystemAdapter, false, false);
     }
 }
