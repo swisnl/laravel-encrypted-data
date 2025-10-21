@@ -27,7 +27,7 @@ composer require swisnl/laravel-encrypted-data
 > Older versions of this package needed a custom model class to encrypt data. This is now replaced with custom casts. Please see [MIGRATING](MIGRATING.md) for a step-by-step guide on how to migrate.
 >
 
-You can use the Eloquent casts provided by this package and everything will be encrypted/decrypted under the hood!
+You can use the Eloquent casts provided by this package just like any other cast. Encryption/decryption is handled automatically behind the scenes.
 
 #### Boolean
 
@@ -51,18 +51,37 @@ protected $casts = [
 
 ### Filesystem
 
-Configure the storage driver in `config/filesystems.php`.
+This package provides a filesystem driver named `encrypted`, which transparently wraps another disk. You can continue using Laravel's standard storage methods and encryption/decryption is handled automatically behind the scenes.
+
+To configure the `encrypted` driver, update `config/filesystems.php` with either a full inline disk configuration:
 
 ```php
 'disks' => [
     'local' => [
-        'driver' => 'local-encrypted',
-        'root' => storage_path('app'),
+        'driver' => 'encrypted',
+        'disk' => [
+            'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
     ],
 ],
 ```
 
-You can now simply use the storage methods as usual and everything will be encrypted/decrypted under the hood!
+Or reference an existing disk by name:
+
+```php
+'disks' => [
+    'local' => [
+        'driver' => 'local',
+        'root' => storage_path('app'),
+    ],
+    
+    'local-encrypted' => [
+        'driver' => 'encrypted',
+        'disk' => 'local',
+    ],
+],
+```
 
 ### Commands
 
