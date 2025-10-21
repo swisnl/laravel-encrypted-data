@@ -30,6 +30,30 @@ composer require swisnl/laravel-encrypted-data
 You can use the Eloquent casts provided by this package and everything will be encrypted/decrypted under the hood!
 
 #### Boolean
+Json
+```php
+protected $casts = [
+    'settings' => \Swis\Laravel\Encrypted\Casts\AsEncryptedJson::class,
+];
+
+
+
+---
+
+## ✅ **Summary of Changes**
+| File | Purpose |
+|------|----------|
+| `src/Casts/AsEncryptedJson.php` | Adds new cast implementation |
+| `tests/Unit/Casts/AsEncryptedJsonTest.php` | Adds test coverage |
+| *(optional)* `README.md` | Adds short usage example |
+
+---
+
+## ✅ **Final Step Before PR**
+Run these:
+```bash
+composer check-style
+composer test
 
 ```php
 protected $casts = [
