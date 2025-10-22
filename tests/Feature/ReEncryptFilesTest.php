@@ -52,7 +52,7 @@ final class ReEncryptFilesTest extends TestCase
     protected function hasEncryptedDisk($app): void
     {
         $app['config']->set('filesystems.default', 'local');
-        $app['config']->set('filesystems.disks.local', ['driver' => 'local-encrypted', 'root' => $this->diskRoot]);
+        $app['config']->set('filesystems.disks.local', ['driver' => 'encrypted', 'disk' => ['driver' => 'local', 'root' => $this->diskRoot]]);
 
         $this->filesystem->ensureDirectoryExists($this->diskRoot);
     }
@@ -60,7 +60,7 @@ final class ReEncryptFilesTest extends TestCase
     protected function hasExtraEncryptedDisk($app): void
     {
         $diskRoot = dirname($this->diskRoot).'/extra';
-        $app['config']->set('filesystems.disks.extra', ['driver' => 'local-encrypted', 'root' => $diskRoot]);
+        $app['config']->set('filesystems.disks.extra', ['driver' => 'encrypted', 'disk' => ['driver' => 'local', 'root' => $diskRoot]]);
 
         $this->filesystem->ensureDirectoryExists($diskRoot);
     }
