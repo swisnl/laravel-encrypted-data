@@ -6,7 +6,7 @@ use Illuminate\Contracts\Encryption\Encrypter;
 
 /**
  * @deprecated only use this when upgrading from the package's EncryptedModel in 2.x to Laravel's built-in encrypted casting introduced in 3.x, this class will be removed in 4.x
- * @see ../MIGRATING.md for a step-by-step guide on how to migrate
+ * @see ../UPGRADING.md for a step-by-step guide on how to migrate
  */
 class ModelEncrypter implements Encrypter
 {

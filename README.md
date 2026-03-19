@@ -24,7 +24,7 @@ composer require swisnl/laravel-encrypted-data
 ### Eloquent casts
 
 > [!WARNING]
-> Older versions of this package needed a custom model class to encrypt data. This is now replaced with custom casts. Please see [MIGRATING](MIGRATING.md) for a step-by-step guide on how to migrate.
+> Older versions of this package needed a custom model class to encrypt data. This is now replaced with custom casts. Please see [UPGRADING](UPGRADING.md) for a step-by-step guide on how to migrate.
 >
 
 You can use the Eloquent casts provided by this package just like any other cast. Encryption/decryption is handled automatically behind the scenes.

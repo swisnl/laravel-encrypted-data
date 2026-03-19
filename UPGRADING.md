@@ -1,4 +1,4 @@
-# Migrating swisnl/laravel-encrypted-data
+# Updating swisnl/laravel-encrypted-data
 
 ## To 3.x from 2.x
 
