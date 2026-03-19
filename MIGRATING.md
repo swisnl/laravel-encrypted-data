@@ -36,17 +36,20 @@ The main difference between `EncryptedModel` provided by version 2.x of this pac
 - protected $encrypted = [
 -     'secret_boolean',
 -     'secret_datetime',
+-     'secret_float',
 -     'secret_integer',
 - ];
 -
 - protected $casts = [
 -     'secret_boolean' => 'bool',
 -     'secret_datetime' => 'datetime',
+-     'secret_float' => 'float',
 -     'secret_integer' => 'int',
 - ];
 + protected $casts = [
 +     'secret_boolean' => \Swis\Laravel\Encrypted\Casts\AsEncryptedBoolean::class,
 +     'secret_datetime' => \Swis\Laravel\Encrypted\Casts\AsEncryptedDateTime::class,
++     'secret_float' => \Swis\Laravel\Encrypted\Casts\AsEncryptedFloat::class,
 +     'secret_integer' => \Swis\Laravel\Encrypted\Casts\AsEncryptedInteger::class,
 + ];
 ```

@@ -53,6 +53,7 @@ protected $casts = [
 
 ```php
 protected $casts = [
+    'float' => \Swis\Laravel\Encrypted\Casts\AsEncryptedFloat::class,
     'integer' => \Swis\Laravel\Encrypted\Casts\AsEncryptedInteger::class,
 ];
 ```
