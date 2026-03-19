@@ -31,7 +31,7 @@ The main difference between `EncryptedModel` provided by version 2.x of this pac
 + ];
 ```
 
-4. If you're using encrypted booleans or date(time)s, use the custom casts provided by this package:
+4. If you're using encrypted booleans, date(time)s, floats or integers, use the custom casts provided by this package:
 ```diff
 - protected $encrypted = [
 -     'secret_boolean',
