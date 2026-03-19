@@ -49,6 +49,14 @@ protected $casts = [
 ];
 ```
 
+#### Numeric
+
+```php
+protected $casts = [
+    'integer' => \Swis\Laravel\Encrypted\Casts\AsEncryptedInteger::class,
+];
+```
+
 ### Filesystem
 
 This package provides a filesystem driver named `encrypted`, which transparently wraps another disk. You can continue using Laravel's standard storage methods and encryption/decryption is handled automatically behind the scenes.
