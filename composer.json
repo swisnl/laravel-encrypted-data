@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "laravel/framework": "^12.20|^13.0",
         "swisnl/flysystem-encrypted": "^2.0"
     },
