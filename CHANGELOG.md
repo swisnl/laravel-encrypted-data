@@ -8,6 +8,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Nothing.
 
+## [3.0.0] - 2026-11-05
+
+- No changes since beta.
+
 ## [3.0.0-beta] - 2026-03-19
 
 Please see [UPGRADING](UPGRADING.md) for details on how to upgrade.
